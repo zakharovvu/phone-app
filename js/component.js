@@ -1,11 +1,13 @@
-class Component{
+export default class Component{
     constructor({ element }) {
         this._element = element;
     }
     hide() {
-        this._element.hdden = true;
+        this._element.hidden = true;
     }
     show() {
-        this._element.hdden = false;
+        
+        this._element.hidden = false;
+        console.log( this._element)
     }
 }

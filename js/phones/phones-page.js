@@ -1,4 +1,3 @@
-
 import PhoneCatalog from './components/phone-catalog.js';
 import PhoneViewer from './components/phone-viewer.js';
 import PhoneService from './services/phone-service.js';
@@ -13,6 +12,7 @@ export default class PhonesPage{
             onPhoneSelected: (phoneId) => {
                 const phoneDetails = PhoneService.getById(phoneId);
                 this._catalog.hide();
+                
                 this._viewer.show(phoneDetails);
             }
         });
@@ -23,7 +23,6 @@ export default class PhonesPage{
     _render() {
         this._element.innerHTML = `
         <div class="row">
-
         <!--Sidebar-->
         <div class="col-md-2">
           <section>
