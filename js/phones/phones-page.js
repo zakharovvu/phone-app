@@ -12,13 +12,17 @@ export default class PhonesPage{
             onPhoneSelected: (phoneId) => {
                 const phoneDetails = PhoneService.getById(phoneId);
                 this._catalog.hide();
-                
+
                 this._viewer.show(phoneDetails);
             }
         });
-        this._viewer = new PhoneViewer({ element: document.querySelector('[data-component="phone-viewer"]') });
-
-        
+        this._viewer = new PhoneViewer({ element: document.querySelector('[data-component="phone-viewer"]'),
+        onBack: () => {
+          this._catalog.show();
+          this._viewer.hide();
+        }
+      });
+       
     }
     _render() {
         this._element.innerHTML = `

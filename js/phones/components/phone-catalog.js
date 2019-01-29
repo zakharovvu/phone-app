@@ -9,22 +9,35 @@ export default class PhoneCatalog extends Component {
         this._phones = phones;
         this._onPhoneSelected = onPhoneSelected;
         this._render();
-        this._element.addEventListener('click', (event) => {
+        // this._element.addEventListener('click', (event) => {
             
-            let datailsLink = event.target.closest('[data-element="details-link"]');
+        //     let datailsLink = event.target.closest('[data-element="details-link"]');
            
-            if (!datailsLink) {
+        //     if (!datailsLink) {
+        //         return;
+        //     }
+        //     let phoneElement = datailsLink.closest('[data-element="phone"]');
+
+        //     this._onPhoneSelected(phoneElement.dataset.phoneId)
+        // });
+            this.on('click', '[data-element="phone"]', (event) => {
+                let phoneElement = event.target.closest('[data-element="phone"]');
+                this._onPhoneSelected(phoneElement.dataset.phoneId);
+                
+            });
+    }
+    on(eventName, selector, callback) {
+        this._element.addEventListener(eventName, (event) => {
+            
+            let delegateTarget = event.target.closest(selector);
+           
+            if (!delegateTarget) {
                 return;
             }
-            let phoneElement = event.target.closest('[data-element="phone"]');
-
-            this._onPhoneSelected(phoneElement.dataset.phoneId)
+            callback(event);
         });
-       
     }
     
-  
-
     _render() {
         this._element.innerHTML = `
         <ul class="phones">
