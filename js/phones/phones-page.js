@@ -1,14 +1,24 @@
 
 import PhoneCatalog from './components/phone-catalog.js';
 import PhoneViewer from './components/phone-viewer.js';
+import PhoneService from './services/phone-service.js';
 
 export default class PhonesPage{
     constructor({ element }) {
         this._element = element;
         this._render();
 
-        this._catalog = new PhoneCatalog({ element: document.querySelector('[data-component="phone-catalog"]') })
-        this._viewer = new PhoneViewer({ element: document.querySelector('[data-component="phone-viewer"]') })
+        this._catalog = new PhoneCatalog({ element: document.querySelector('[data-component="phone-catalog"]'),
+            phones: PhoneService.getAll(),
+            onPhoneSelected: (phoneId) => {
+                const phoneDetails = PhoneService.getById(phoneId);
+                this._catalog.hide();
+                this._viewer.show(phoneDetails);
+            }
+        });
+        this._viewer = new PhoneViewer({ element: document.querySelector('[data-component="phone-viewer"]') });
+
+        
     }
     _render() {
         this._element.innerHTML = `
