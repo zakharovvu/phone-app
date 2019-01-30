@@ -22,14 +22,18 @@ export default class PhonesPage {
       phones: PhoneService.getAll(),
     });
 
+    this._catalog.subscribe('button-add', (phoneId) => {// подписан на кнопку адд
+      console.log('dfdfd');
+    });
+
     this._catalog.subscribe('phone-selected', (phoneId) => {
         const phoneDetails = PhoneService.getById(phoneId);
         
         this._catalog.hide();
-        this._viewer.show(phoneDetails);
-        
+        this._viewer.show(phoneDetails); 
       }
     );
+    
   }
 
   _initViewer() {
