@@ -23,7 +23,8 @@ export default class PhonesPage {
     });
 
     this._catalog.subscribe('button-add', (phoneId) => {// подписан на кнопку адд
-      console.log('dfdfd');
+      this._cart._addContentToHtml(phoneId);
+      //this._cart._render();
     });
 
     this._catalog.subscribe('phone-selected', (phoneId) => {
@@ -48,9 +49,8 @@ export default class PhonesPage {
   }
 
   _initShoppingCart() {
-    this._cart = new ShoppingCart({
-      element: document.querySelector('[data-component="shopping-cart"]'),
-    });
+    this._cart = new ShoppingCart({element: document.querySelector('[data-component="shopping-cart"]'),});
+    
   }
 
   _initFilter() {
